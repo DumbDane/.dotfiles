@@ -27,7 +27,7 @@
       Ninox = lib.nixosSystem {
         inherit system;
         # specialArgs = { inherit system; };
-        modules = [ ./hosts/ninox/configuration.nix ];
+        modules = [ ./ninox/configuration.nix ];
       };
     };
     homeConfigurations = {

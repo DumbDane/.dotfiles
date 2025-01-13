@@ -1,5 +1,3 @@
 .git
-flake.nix
-flake.lock
-hosts
-home.nix
+metal
+darwin
