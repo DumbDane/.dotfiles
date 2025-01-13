@@ -89,6 +89,8 @@
     #  thunderbird
 	zsh
 	stow
+	fzf
+	zoxide
     ];
   };
 
