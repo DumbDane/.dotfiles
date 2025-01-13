@@ -1,0 +1,5 @@
+.git
+flake.nix
+flake.lock
+hosts
+home.nix
