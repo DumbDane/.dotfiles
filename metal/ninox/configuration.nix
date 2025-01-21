@@ -93,6 +93,9 @@
 	zoxide
 	ghostty
 	ripgrep
+	gcc
+    nodejs
+    python3
     ];
   };
 
@@ -110,6 +113,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
+    tmux
     git
     discord
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
