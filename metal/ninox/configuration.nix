@@ -91,6 +91,7 @@
 	stow
 	fzf
 	zoxide
+	ghostty
     ];
   };
 
