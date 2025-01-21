@@ -92,6 +92,7 @@
 	fzf
 	zoxide
 	ghostty
+	ripgrep
     ];
   };
 
