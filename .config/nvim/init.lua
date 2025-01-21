@@ -1,2 +1,2 @@
-require("robert.remap")
+require("robert")
 print("hello")
