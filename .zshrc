@@ -7,9 +7,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 # For mac
-# eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ "$OSTYPE" = "darwin*" ]; then 
+	eval "$(/opt/homebrew/bin/brew shellenv)"; 
+fi
 
 # Set the directory we want to store zinit and plugings
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
