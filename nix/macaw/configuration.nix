@@ -3,13 +3,14 @@
 # and in the NixOS manual ('nixos-help')
 # Otherwise (and maybe firstly) check the darwin repository on github
 
-{ self, configs, nix-darwin, pkgs, nix-homebrew, mac-app-util }:
+
+{ self, pkgs, nix-darwin, nix-homebrew, mac-app-util, ... }:
 
 {
     imports = [ ];
     # The platform the configuration will be used on.
-    pkgs.hostPlatform = "aarch64-darwin";
-    pkgs.config.allowUnfree = true;
+    # pkgs.hostPlatform = "aarch64-darwin";
+    # pkgs.config.allowUnfree = true;
 
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
@@ -60,10 +61,10 @@
     nix.settings.experimental-features = "nix-command flakes";
 
     # Set Git commit hash for darwin-version.
-    system.configurationRevision = self.rev or self.dirtyRev or null;
+    # system.configurationRevision = self.rev or self.dirtyRev or null;
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
     system.stateVersion = 5;
 
-};
+}
