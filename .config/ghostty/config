@@ -2,5 +2,7 @@ keybind=ctrl+shift+-=reload_config
 
 background-opacity = 0.8
 
+title = 👻
+
 window-height = 41
 window-width = 180

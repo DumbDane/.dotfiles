@@ -7,7 +7,7 @@ Unsure how to download but nixOS of some kind for sure required aside from other
 
 ### Requirements
     git
-    nixOS of some kind
+    nixOS of some kind (only if you want stuff from nix/)
 
 
 
@@ -23,7 +23,20 @@ enviroment.pkgs = [
   ...
   git
   stow
+  fzf
+  zoxide
 ];
+```
+
+Additional requirements for neovim lsp configuration
+```
+enviroment.pkgs = [
+    ...
+    python3 
+    nodejs
+    cargo
+];
+
 ```
 
 ### Installation
