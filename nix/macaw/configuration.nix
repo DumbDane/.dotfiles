@@ -28,6 +28,10 @@
             nodejs
             spotify
             discord
+            docker
+            docker-compose
+            utm
+            shellcheck
         ];
 
 
@@ -39,10 +43,12 @@
             upgrade = true;
             cleanup = "zap";
         };
+        taps = [ ];
         brews = [ "mas" ];
         casks = [
             "hammerspoon"
             "ghostty"
+            "db-browser-for-sqlite"
         ];
         masApps = { };
 
