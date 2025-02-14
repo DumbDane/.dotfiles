@@ -18,13 +18,11 @@
         [ 
             zsh
             neovim
-            fish
             tmux
             zoxide
             fzf
             stow
             obsidian
-            python3
             nodejs
             spotify
             discord
@@ -49,6 +47,8 @@
             "hammerspoon"
             "ghostty"
             "db-browser-for-sqlite"
+            "vagrant"
+            "vmware-fusion"
         ];
         masApps = { };
 
@@ -58,7 +58,7 @@
     programs.zsh.enable = true;
 
     # Shell Aliases
-    environment.shellAliases = { python = "python3"; };
+    # environment.shellAliases = { python = "python3"; };
 
     # Fonts
     fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
@@ -68,6 +68,7 @@
 
     # Set Git commit hash for darwin-version.
     # system.configurationRevision = self.rev or self.dirtyRev or null;
+
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
