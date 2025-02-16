@@ -48,7 +48,7 @@
             "ghostty"
             "db-browser-for-sqlite"
             "vagrant"
-            "vmware-fusion"
+            "postman"
         ];
         masApps = { };
 
