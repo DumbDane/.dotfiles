@@ -33,6 +33,7 @@
                     Ninox = lib.nixosSystem {
                         inherit system;
                         modules = [ ./ninox/configuration.nix ];
+                        specialArgs = { inherit inputs; };
                     };
                 };
 
