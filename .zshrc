@@ -72,6 +72,7 @@ alias dev='nix develop -c $SHELL'
 # Shell integrations (fuzzy find for tab completions and zoxide for fuzzy matching)
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(direnv hook zsh)"
 
 
 # Snippets (imported aliases)
@@ -97,3 +98,4 @@ zinit cdreplay -q
 fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.3/contrib/zsh $fpath)
 compinit
 # <<<<  Vagrant command completion (end)
+
