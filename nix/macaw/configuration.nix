@@ -22,6 +22,7 @@
             zoxide
             fzf
             stow
+            direnv
             obsidian
             nodejs
             spotify
@@ -59,6 +60,7 @@
 
     # Enable alternative shell support in nix-darwin.
     programs.zsh.enable = true;
+
 
     # Shell Aliases
     # environment.shellAliases = { python = "python3"; };
