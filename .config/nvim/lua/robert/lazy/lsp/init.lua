@@ -30,10 +30,11 @@ return {
 
         local servers = {
             "lua_ls",
+            "nixd",
             "pyright",
             "dockerls",
             "docker_compose_language_service",
-            "nixd",
+            --"ruby_lsp", -- not working, some prism dependency is missing
         }
 
         for _, server in ipairs(servers) do
