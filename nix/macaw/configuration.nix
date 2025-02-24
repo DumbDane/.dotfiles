@@ -10,7 +10,7 @@
     imports = [ ];
     # The platform the configuration will be used on.
     # pkgs.hostPlatform = "aarch64-darwin";
-    # pkgs.config.allowUnfree = true;
+    nixpkgs.config.allowUnfree = true;
 
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
@@ -30,6 +30,9 @@
             docker-compose
             utm
             shellcheck
+            vscode
+            nixd
+            lua-language-server
         ];
 
 
@@ -44,8 +47,8 @@
         taps = [ ];
         brews = [ "mas" ];
         casks = [
-            "hammerspoon"
             "ghostty"
+            "hammerspoon"
             "db-browser-for-sqlite"
             "vagrant"
             "postman"
