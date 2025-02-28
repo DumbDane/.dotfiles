@@ -34,6 +34,9 @@
             vscode
             nixd
             lua-language-server
+            dockerfile-language-server-nodejs
+            docker-compose-language-service
+            pyright
         ];
 
 
