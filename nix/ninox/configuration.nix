@@ -14,7 +14,6 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    audio.enable = true;
 
     networking.hostName = "Ninox"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -23,26 +22,12 @@
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+    audio.enable = true;
+    steam.enable = true;
+
     # Enable networking
     networking.networkmanager.enable = true;
 
-    # Set your time zone.
-    time.timeZone = "Europe/Copenhagen";
-
-    # Select internationalisation properties.
-    i18n.defaultLocale = "en_GB.UTF-8";
-
-    i18n.extraLocaleSettings = {
-        LC_ADDRESS = "da_DK.UTF-8";
-        LC_IDENTIFICATION = "da_DK.UTF-8";
-        LC_MEASUREMENT = "da_DK.UTF-8";
-        LC_MONETARY = "da_DK.UTF-8";
-        LC_NAME = "da_DK.UTF-8";
-        LC_NUMERIC = "da_DK.UTF-8";
-        LC_PAPER = "da_DK.UTF-8";
-        LC_TELEPHONE = "da_DK.UTF-8";
-        LC_TIME = "da_DK.UTF-8";
-    };
 
     # Enable the X11 windowing system.
     services.xserver.enable = true;
@@ -114,7 +99,6 @@
         lua-language-server
         discord
         spotify
-        steam
         # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
         #  wget
     ];

@@ -3,8 +3,9 @@
     imports = [
         ./audio.nix
         ./steam.nix
+        ./location.nix
     ];
 
-    audio.enable = lib.mkDefault false;
+    audio.enable = lib.mkDefault true;
     steam.enable = lib.mkDefault false;
 }
