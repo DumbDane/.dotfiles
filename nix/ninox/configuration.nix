@@ -14,6 +14,8 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
+    audio.enable = true;
+
     networking.hostName = "Ninox"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -61,21 +63,6 @@
     # Enable CUPS to print documents.
     services.printing.enable = true;
 
-    # Enable sound with pipewire.
-    hardware.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        # If you want to use JACK applications, uncomment this
-        #jack.enable = true;
-
-        # use the example session manager (no others are packaged yet so this is enabled by default,
-        # no need to redefine it in your config for now)
-        #media-session.enable = true;
-    };
 
     # Enable touchpad support (enabled default in most desktopManager).
     # services.xserver.libinput.enable = true;
@@ -84,7 +71,7 @@
     users.users.robert = {
         isNormalUser = true;
         description = "Laurids Robert Holme Pedersen";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [ "networkmanager" "wheel" "audio" ];
         packages = with pkgs; [
             #  thunderbird
             zsh
@@ -93,13 +80,14 @@
             zoxide
             ghostty
             ripgrep
-            discord
-            spotify
             gcc
             nixd
             pyright
+            docker
+            docker-compose
             docker-compose-language-service
             docker-ls
+            wireplumber
         ];
     };
 
@@ -108,6 +96,8 @@
 
     # Install firefox.
     programs.firefox.enable = true;
+
+    # Default shell
     environment.shells = with pkgs; [ zsh ];
     users.defaultUserShell = pkgs.zsh;
     programs.zsh.enable = true;
@@ -122,6 +112,9 @@
         tmux
         git
         lua-language-server
+        discord
+        spotify
+        steam
         # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
         #  wget
     ];
@@ -149,6 +142,8 @@
     # networking.firewall.allowedUDPPorts = [ ... ];
     # Or disable the firewall altogether.
     # networking.firewall.enable = false;
+
+    virtualisation.docker.enable = true;
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
