@@ -24,6 +24,7 @@
 
     audio.enable = true;
     steam.enable = true;
+    shells.zsh.enable = true;
 
     # Enable networking
     networking.networkmanager.enable = true;
@@ -59,7 +60,6 @@
         extraGroups = [ "networkmanager" "wheel" "audio" ];
         packages = with pkgs; [
             #  thunderbird
-            zsh
             stow
             fzf
             zoxide
@@ -72,7 +72,6 @@
             docker-compose
             docker-compose-language-service
             docker-ls
-            wireplumber
         ];
     };
 
@@ -82,10 +81,6 @@
     # Install firefox.
     programs.firefox.enable = true;
 
-    # Default shell
-    environment.shells = with pkgs; [ zsh ];
-    users.defaultUserShell = pkgs.zsh;
-    programs.zsh.enable = true;
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
@@ -128,6 +123,15 @@
     # networking.firewall.enable = false;
 
     virtualisation.docker.enable = true;
+
+
+    nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        persistent = true;
+        options = "--delete-older-than 30d";
+    };
+    nix.settings.auto-optimise-store = true;
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
