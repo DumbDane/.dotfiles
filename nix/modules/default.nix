@@ -5,6 +5,7 @@
         ./steam.nix
         ./location.nix
         ./shells
+        ./blender.nix
     ];
 
     # System Settings
@@ -17,4 +18,5 @@
 
     # GUI Applications
     steam.enable = lib.mkDefault false;
+    blender.enable = lib.mkDefault true;
 }
