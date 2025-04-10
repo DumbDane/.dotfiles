@@ -6,7 +6,6 @@
 
     config = lib.mkIf config.games.enable {
         environment.systemPackages = with pkgs; [ mindustry ];
-        programs.mindustry.enable = true;
     };
 
 }

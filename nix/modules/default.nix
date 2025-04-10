@@ -3,6 +3,7 @@
     imports = [
         ./audio.nix
         ./steam.nix
+        ./games.nix
         ./location.nix
         ./shells
         ./blender.nix
@@ -19,4 +20,5 @@
     # GUI Applications
     steam.enable = lib.mkDefault false;
     blender.enable = lib.mkDefault true;
+    games.enable = lib.mkDefault true;
 }

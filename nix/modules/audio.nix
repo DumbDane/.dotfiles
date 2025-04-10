@@ -6,7 +6,7 @@
 
     config = lib.mkIf config.audio.enable {
         # Enable sound with pipewire.
-        environment.systemPackages = with pkgs; [ wireplumber ];
+        environment.systemPackages = with pkgs; [ pulseaudio wireplumber ];
         services.pulseaudio.enable = false;
         security.rtkit.enable = true;
         services.pipewire = {

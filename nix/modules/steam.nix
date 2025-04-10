@@ -6,9 +6,19 @@
 
     config = lib.mkIf config.steam.enable {
         environment.systemPackages = with pkgs; [ steam mangohud protonup-qt lutris bottles heroic ];
-        programs.steam.enable = true;
-        programs.steam.extraPackages = with pkgs; [ gamescope ];
-        programs.steam.gamescopeSession.enable = true;
+        hardware.graphics = {
+            enable = true;
+            enable32Bit = true;
+            extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+        };
+        services.xserver.videoDrivers = [ "nvidia" ];
+        hardware.nvidia.open = false;
+
+        programs.steam = {
+            enable = true;
+            extraPackages = with pkgs; [ gamescope ];
+            gamescopeSession.enable = true;
+        };
         programs.gamescope.enable = true;
 
         fileSystems."/games" = {

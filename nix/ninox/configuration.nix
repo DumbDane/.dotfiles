@@ -26,6 +26,8 @@
     steam.enable = true;
     shells.zsh.enable = true;
 
+
+
     # Enable networking
     networking.networkmanager.enable = true;
 
@@ -57,7 +59,7 @@
     users.users.robert = {
         isNormalUser = true;
         description = "Laurids Robert Holme Pedersen";
-        extraGroups = [ "networkmanager" "wheel" "audio" ];
+        extraGroups = [ "networkmanager" "wheel" "audio" "input" "gamemode" ];
         packages = with pkgs; [
             #  thunderbird
             stow
@@ -72,6 +74,8 @@
             docker-compose
             docker-compose-language-service
             docker-ls
+
+            prismlauncher
         ];
     };
 
