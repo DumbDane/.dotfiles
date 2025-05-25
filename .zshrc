@@ -78,6 +78,8 @@ eval "$(direnv hook zsh)"
 fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.3/contrib/zsh $fpath)
 # <<<<  Vagrant command completion (end)
 
+# bun completions
+# [ -s "/Users/lauridspedersen/.bun/_bun" ] && source "/Users/lauridspedersen/.bun/_bun"
 # Snippets (imported aliases)
 # zinit snippet OMZP::git
 # zinit snippet OMZP::sudo

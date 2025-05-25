@@ -23,6 +23,7 @@
             fzf
             stow
             direnv
+            minikube
             obsidian
             nodejs
             spotify
@@ -53,9 +54,8 @@
         casks = [
             "ghostty"
             "hammerspoon"
-            "db-browser-for-sqlite"
-            "vagrant"
             "postman"
+            "blender"
         ];
         masApps = { };
 
