@@ -10,9 +10,13 @@
             enable = true;
             enable32Bit = true;
             extraPackages = with pkgs; [ nvidia-vaapi-driver ];
+
         };
         services.xserver.videoDrivers = [ "nvidia" ];
-        hardware.nvidia.open = false;
+        hardware.nvidia = {
+            open = false;
+        };
+        boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
         programs.steam = {
             enable = true;
