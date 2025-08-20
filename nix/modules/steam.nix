@@ -16,7 +16,6 @@
         hardware.nvidia = {
             open = false;
         };
-        boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
         programs.steam = {
             enable = true;
