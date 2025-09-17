@@ -11,6 +11,7 @@
     # The platform the configuration will be used on.
     # pkgs.hostPlatform = "aarch64-darwin";
     nixpkgs.config.allowUnfree = true;
+    system.primaryUser = "lauridspedersen";
 
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
@@ -56,6 +57,9 @@
             "hammerspoon"
             "postman"
             "blender"
+            "prusaslicer"
+            "orcaslicer"
+            "kicad"
         ];
         masApps = { };
 

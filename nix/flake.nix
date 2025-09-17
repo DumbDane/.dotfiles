@@ -68,6 +68,7 @@
                                 };
                             }
                         ];
+                        specialArgs = { inherit inputs; };
                     };
                 };
         };
