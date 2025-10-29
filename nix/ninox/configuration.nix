@@ -35,11 +35,17 @@
     # Enable the X11 windowing system.
     services.xserver.enable = true;
 
+    ## Settings for gnome
     # Disable wayland
-    services.displayManager.gdm.wayland = false;
+    # services.displayManager.gdm.wayland = false;
     # Enable the GNOME Desktop Environment.
-    services.displayManager.gdm.enable = true;
-    services.desktopManager.gnome.enable = true;
+    # services.displayManager.gdm.enable = true;
+    # services.desktopManager.gnome.enable = true;
+
+    ## Settings for kde
+    services.xserver.desktopManager.plasma6.enable = true;
+    services.xserver.displayManager.sddm.enable = true;
+
 
     # Configure keymap in X11
     services.xserver.xkb = {
