@@ -4,6 +4,8 @@
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-unstable"; # github:NixOS/nixpkgs/nixos-unstable
 
+        zen-browser.url = "github:youwen5/zen-browser-flake";
+        zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
         home-manager.url = "github:nix-community/home-manager/master";
         home-manager.inputs.nixpkgs.follows = "nixpkgs";
