@@ -10,7 +10,6 @@
     imports = [ ];
     # The platform the configuration will be used on.
     # pkgs.hostPlatform = "aarch64-darwin";
-    nixpkgs.config.allowUnfree = true;
     system.primaryUser = "lauridspedersen";
 
     # List packages installed in system profile. To search by name, run:
@@ -23,6 +22,7 @@
             zoxide
             fzf
             stow
+            ffmpeg
             direnv
             minikube
             obsidian
@@ -36,9 +36,10 @@
             vscode
             nixd
             lua-language-server
-            dockerfile-language-server-nodejs
+            dockerfile-language-server
             docker-compose-language-service
             pyright
+            (python3.withPackages(ps: with ps; [uv]))
         ];
 
 
@@ -56,10 +57,10 @@
             "ghostty"
             "hammerspoon"
             "postman"
-            "blender"
             "prusaslicer"
             "orcaslicer"
-            "kicad"
+            "lm-studio"
+            "zen"
         ];
         masApps = { };
 

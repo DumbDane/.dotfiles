@@ -28,6 +28,10 @@
                     allowUnfree = true;
                 };
             };
+            macpkgs = import nixpkgs {
+                system = "aarch64-darwin";
+                config.allowUnfree = true;
+            };
         in
             {
             nixosConfigurations = 
@@ -53,11 +57,8 @@
             darwinConfigurations = 
                 {
                     Macaw = nix-darwin.lib.darwinSystem {
-                        pkgs = import nixpkgs {
-                            system = "aarch64-darwin";
-                            config.allowUnfree = true;
-                        };
                         modules = [ 
+                            { nixpkgs.pkgs = macpkgs; }
                             ./macaw/configuration.nix 
                             mac-app-util.darwinModules.default
                             nix-homebrew.darwinModules.nix-homebrew 
