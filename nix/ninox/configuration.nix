@@ -83,7 +83,6 @@
             docker-compose
             docker-compose-language-service
             docker-ls
-
             prismlauncher
         ];
     };
@@ -141,6 +140,12 @@
 
     virtualisation.docker.enable = true;
 
+
+    swapDevices = [{
+      device = "/var/lib/swapfile";
+      size = 16*1024;
+      options = [ "discard=once" ];
+    }];
 
     nix.gc = {
         automatic = true;

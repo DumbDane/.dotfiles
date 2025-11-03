@@ -4,7 +4,7 @@
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-unstable"; # github:NixOS/nixpkgs/nixos-unstable
 
-        zen-browser.url = "github:youwen5/zen-browser-flake";
+        zen-browser.url = "github:0xc000022070/zen-browser-flake";
         zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
         home-manager.url = "github:nix-community/home-manager/master";
@@ -24,9 +24,7 @@
             system = "x86_64-linux";
             pkgs = import nixpkgs {
                 inherit system;
-                config = {
-                    allowUnfree = true;
-                };
+                config.allowUnfree = true;
             };
             macpkgs = import nixpkgs {
                 system = "aarch64-darwin";
