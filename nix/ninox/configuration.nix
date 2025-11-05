@@ -73,6 +73,7 @@
             stow
             fzf
             zoxide
+            direnv
             ghostty
             tailscale
             ripgrep
