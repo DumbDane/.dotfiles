@@ -5,11 +5,20 @@
     };
 
     config = lib.mkIf config.steam.enable {
-        environment.systemPackages = with pkgs; [ steam mangohud protonup-qt lutris bottles heroic ];
+        environment.systemPackages = with pkgs; [
+            steam
+            mangohud
+            protonup-qt
+            lutris
+            heroic
+            wine
+            wineWow64Packages.stableFull
+            winetricks
+            vulkan-tools
+        ];
         hardware.graphics = {
             enable = true;
             enable32Bit = true;
-            extraPackages = with pkgs; [ nvidia-vaapi-driver ];
 
         };
         services.xserver.videoDrivers = [ "nvidia" ];

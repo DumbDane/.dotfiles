@@ -85,6 +85,7 @@
             docker-compose-language-service
             docker-ls
             prismlauncher
+            unityhub
         ];
     };
 
