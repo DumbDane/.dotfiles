@@ -55,7 +55,7 @@
             darwinConfigurations = 
                 {
                     Macaw = nix-darwin.lib.darwinSystem {
-                        modules = [ 
+                        modules = [
                             { nixpkgs.pkgs = macpkgs; }
                             ./macaw/configuration.nix 
                             mac-app-util.darwinModules.default

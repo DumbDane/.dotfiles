@@ -60,12 +60,14 @@ setopt hist_find_no_dups
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" 
 zstyle ':completion:*' menu no
+zstyle ':completion:*:ssh:*' hosts
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 
 # Aliases
 alias ls='ls --color'
+alias ll='ls -la --color'
 alias dev='nix develop -c $SHELL'
 
 
@@ -73,10 +75,6 @@ alias dev='nix develop -c $SHELL'
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(direnv hook zsh)"
-
-# >>>> Vagrant command completion (start)
-fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.3/contrib/zsh $fpath)
-# <<<<  Vagrant command completion (end)
 
 # bun completions
 # [ -s "/Users/lauridspedersen/.bun/_bun" ] && source "/Users/lauridspedersen/.bun/_bun"
@@ -97,4 +95,3 @@ zinit cdreplay -q
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-

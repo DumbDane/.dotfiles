@@ -5,8 +5,43 @@
 
 
 { self, pkgs, nix-darwin, nix-homebrew, mac-app-util, ... }:
+let cfg = {
+    applications = with pkgs; [
+        obsidian
+        vscode
+        postman
+        discord
+        spotify
+    ];
 
-{
+    packages = with pkgs; [
+        zsh
+        neovim
+        tmux
+        zoxide
+        fzf
+        stow
+        ffmpeg
+        direnv
+        ripgrep
+        minikube
+        imagemagick
+        shellcheck
+        nodejs
+        docker
+        docker-compose
+        (python3.withPackages(ps: with ps; [uv]))
+    ];
+
+    languageServers = with pkgs; [
+        nixd
+        lua-language-server
+        dockerfile-language-server
+        docker-compose-language-service
+        pyright
+    ];
+};
+in {
     imports = [ ];
     # The platform the configuration will be used on.
     # pkgs.hostPlatform = "aarch64-darwin";
@@ -14,34 +49,7 @@
 
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
-    environment.systemPackages = with pkgs;
-        [ 
-            zsh
-            neovim
-            tmux
-            zoxide
-            fzf
-            stow
-            ffmpeg
-            direnv
-            minikube
-            obsidian
-            nodejs
-            spotify
-            discord
-            docker
-            docker-compose
-            utm
-            shellcheck
-            vscode
-            nixd
-            lua-language-server
-            dockerfile-language-server
-            docker-compose-language-service
-            pyright
-            (python3.withPackages(ps: with ps; [uv]))
-        ];
-
+    environment.systemPackages = cfg.applications ++ cfg.packages ++ cfg.languageServers;
 
 
     homebrew = {
@@ -55,12 +63,11 @@
         brews = [ "mas" ];
         casks = [
             "ghostty"
+            "zen"
             "hammerspoon"
-            "postman"
             "prusaslicer"
             "orcaslicer"
-            "lm-studio"
-            "zen"
+            "bambu-studio"
         ];
         masApps = { };
 
