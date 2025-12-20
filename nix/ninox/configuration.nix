@@ -86,6 +86,7 @@
             docker-ls
             prismlauncher
             unityhub
+            nextcloud-client
         ];
     };
 
