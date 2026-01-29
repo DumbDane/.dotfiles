@@ -1,9 +1,10 @@
 return {
     cmd = { "nixd" },
+    filetypes = { "nix" },
     settings = {
         nixd = {
             nixpkgs = {
-                expr = "import <nixpkgs> { }",
+                expr = "(builtins.getFlake (toString ./.)) .inputs.nixpkgs",
             },
             formatting = {
                 command = { "nixfmt" }, -- or nixfmt or nixpkgs-fmt
