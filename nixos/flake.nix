@@ -1,76 +1,81 @@
 {
-    description = "My Flake";
+  description = "My Flake";
 
-    inputs = {
-        nixpkgs.url = "nixpkgs/nixos-unstable"; # github:NixOS/nixpkgs/nixos-unstable
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-unstable"; # github:NixOS/nixpkgs/nixos-unstable
 
-        zen-browser.url = "github:0xc000022070/zen-browser-flake";
-        zen-browser.inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
-        home-manager.url = "github:nix-community/home-manager/master";
-        home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-        nix-darwin.url = "github:LnL7/nix-darwin";
-        nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    mac-app-util.url = "github:hraban/mac-app-util";
+  };
 
-        nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-        mac-app-util.url = "github:hraban/mac-app-util";
-    };
-
-    outputs = inputs@{self, nixpkgs, home-manager, nix-darwin, nix-homebrew, mac-app-util, ...}:
-        let
-            lib = nixpkgs.lib;
-            system = "x86_64-linux";
-            pkgs = import nixpkgs {
-                inherit system;
-                config.allowUnfree = true;
-            };
-            macpkgs = import nixpkgs {
-                system = "aarch64-darwin";
-                config.allowUnfree = true;
-            };
-        in
-            {
-            nixosConfigurations = 
-                {
-                    Ninox = lib.nixosSystem {
-                        inherit system;
-                        modules = [ 
-                            ./ninox/configuration.nix 
-                            ./modules
-                        ];
-                        specialArgs = { inherit inputs; };
-                    };
-                };
-
-            homeConfigurations = 
-                {
-                    robert = home-manager.lib.homeManagerConfiguration {
-                        inherit pkgs;
-                        modules = [ ./home.nix ];
-                    };
-                };
-
-            darwinConfigurations = 
-                {
-                    Macaw = nix-darwin.lib.darwinSystem {
-                        modules = [
-                            { nixpkgs.pkgs = macpkgs; }
-                            ./macaw/configuration.nix 
-                            mac-app-util.darwinModules.default
-                            nix-homebrew.darwinModules.nix-homebrew 
-                            {
-                                nix-homebrew = {
-                                enable = true;
-                                enableRosetta = true;
-                                user = "lauridspedersen";
-                                autoMigrate = true;
-                                };
-                            }
-                        ];
-                        specialArgs = { inherit inputs; };
-                    };
-                };
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      nix-darwin,
+      nix-homebrew,
+      mac-app-util,
+      ...
+    }:
+    let
+      lib = nixpkgs.lib;
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      macpkgs = import nixpkgs {
+        system = "aarch64-darwin";
+        config.allowUnfree = true;
+      };
+    in
+    {
+      nixosConfigurations = {
+        Ninox = lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./ninox/configuration.nix
+            ./modules
+          ];
+          specialArgs = { inherit inputs; };
         };
+      };
+
+      homeConfigurations = {
+        robert = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home.nix ];
+        };
+      };
+
+      darwinConfigurations = {
+        Macaw = nix-darwin.lib.darwinSystem {
+          modules = [
+            { nixpkgs.pkgs = macpkgs; }
+            ./macaw/configuration.nix
+            mac-app-util.darwinModules.default
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                user = "lauridspedersen";
+                autoMigrate = true;
+              };
+            }
+          ];
+          specialArgs = { inherit inputs; };
+        };
+      };
+    };
 }
