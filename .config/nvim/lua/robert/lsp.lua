@@ -30,7 +30,7 @@ for _, file in pairs(lsp_configs) do
 		local cmd = config.cmd and config.cmd[1]
 
 		if cmd and has(cmd) then
-			vim.lsp.config[name] = config
+			vim.lsp.config(name, config)
 			vim.lsp.enable(name)
 		end
 	else

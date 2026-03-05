@@ -73,6 +73,7 @@ in
     casks = [
       "ghostty"
       "zen"
+      "zotero"
       "hammerspoon"
       "prusaslicer"
       "orcaslicer"

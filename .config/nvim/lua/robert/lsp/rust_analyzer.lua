@@ -3,12 +3,15 @@ return {
 	filetypes = { "rust" },
 	settings = {
 		["rust-analyzer"] = {
-			cargo = {
-				allFeatures = true,
-			},
-			checkOnSave = true,
-			check = {
-				command = "clippy",
+			diagnostics = {
+				imports = { granularity = { group = "module" }, prefix = "self" },
+				cargo = {
+					buildScripts = { enable = true },
+					--allFeatures = true,
+				},
+				check = {
+					command = "clippy",
+				},
 			},
 		},
 	},
