@@ -92,6 +92,8 @@
       prismlauncher
       unityhub
       nextcloud-client
+      nixfmt
+      zotero
     ];
   };
 
