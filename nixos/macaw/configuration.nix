@@ -19,6 +19,7 @@ let
       postman
       discord
       spotify
+      thunderbird
     ];
 
     packages = with pkgs; [
