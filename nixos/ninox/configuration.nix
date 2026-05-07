@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -44,8 +43,8 @@
   # services.desktopManager.gnome.enable = true;
 
   ## Settings for kde
-  services.xserver.desktopManager.plasma6.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -94,6 +93,8 @@
       nextcloud-client
       nixfmt
       zotero
+      bambu-studio
+      easyeffects
     ];
   };
 
@@ -117,7 +118,7 @@
     discord
     spotify
     obsidian
-    inputs.zen-browser.packages.${pkgs.system}.default
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
   ];

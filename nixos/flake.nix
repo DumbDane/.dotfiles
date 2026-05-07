@@ -44,6 +44,18 @@
         Ninox = lib.nixosSystem {
           inherit system;
           modules = [
+            (
+              { pkgs, ... }:
+              {
+                nixpkgs.overlays = [
+                  (final: prev: {
+                    openldap = prev.openldap.overrideAttrs (_: {
+                      doCheck = false;
+                    });
+                  })
+                ];
+              }
+            )
             ./ninox/configuration.nix
             ./modules
           ];
