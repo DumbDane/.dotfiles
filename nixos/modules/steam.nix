@@ -44,6 +44,7 @@
     fileSystems."/games" = {
       device = "/dev/disk/by-label/Games";
       fsType = "ntfs";
+      options = [ "nofail" ];
     };
   };
 }
