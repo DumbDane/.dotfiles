@@ -3,3 +3,4 @@
 nix
 README.md
 .DS_Store
+.envrc
