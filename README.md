@@ -7,7 +7,7 @@ Unsure how to download but nixOS of some kind for sure required aside from other
 
 ### Requirements
     git
-    nixOS of some kind (only if you want stuff from nix/)
+    nix of some kind (only if you want stuff from nix/)
 
 
 
@@ -44,13 +44,16 @@ First, check out the dotfiles repo in $HOME directory
 
 ```
   git clone git@github.com:DumbDane/.dotfiles.git && \
-  cd dotfiles
+  cd .dotfiles
 ```
 
 Then use GNU Stow to create symlinks
 
 ```
-  stow .
+# For linux
+  stow zsh nvim tmux ghostty direnv wireplumber
+# For MacOS
+  stow zsh nvim tmux ghostty direnv hammerspoon
 ```
 
 More info on stow:
