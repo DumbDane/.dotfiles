@@ -1,22 +1,44 @@
-local mash = {"ctrl","alt","cmd"}
+local mash = {"ctrl","cmd"}
 
--- Fixed simulator width (from your capture)
-local simWidth = 450
+-- Fractions for vertical placement (still proportional)
+local fy, fh = 0.017, 0.98
+local gutter = 2  -- padding between main and simulator
 
--- Shortcut: resize focused window to avoid the simulator area (on the right side)
 hs.hotkey.bind(mash, "Z", function()
-  local win = hs.window.focusedWindow()
-  if not win then return end
-  local screenFrame = win:screen():frame()
+  local mainWin = hs.window.focusedWindow()
+  if not mainWin then return end
+  local screenFrame = mainWin:screen():frame()
 
-  -- Make window take the left portion of the screen, excluding sim area on the right
-  local f = {
-    x = screenFrame.x,
-    y = screenFrame.y,
-    w = screenFrame.w - simWidth,  -- reserve 444px for simulator on right
-    h = screenFrame.h
-  }
+  local simApp = hs.application.find("Simulator")
+  if simApp then
+    local simWin = simApp:mainWindow()
+    if simWin then
+      local s = simWin:screen():frame()
+      local simFrame = simWin:frame()
+      local simWidth = simFrame.w
 
-  win:setFrame(f)
+      -- 1) Main window: stop 5px before the simulator
+      local mainFrame = {
+        x = screenFrame.x,
+        y = screenFrame.y,
+        w = screenFrame.w - simWidth - 2 * gutter,
+        h = screenFrame.h,
+      }
+      mainWin:setFrame(mainFrame)
+
+      -- 2) Simulator window: move to the right of the screen
+      local f = {
+        x = s.x + s.w - simWidth - gutter,
+        y = s.y + fy * s.h,
+        w = simWidth,
+        h = fh * s.h,
+      }
+      simWin:setFrame(f)
+    else
+      hs.alert.show("Simulator window not found")
+    end
+  else
+    hs.alert.show("Simulator app not found")
+  end
 end)
 
