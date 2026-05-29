@@ -12,6 +12,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.sops-nix.nixosModules.sops
   ];
 
   # Bootloader.
@@ -60,6 +61,11 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
+  # Sops definitions
+  sops = {
+    defaultSopsFile = ../../secrets.yaml;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.robert = {

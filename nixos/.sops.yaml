@@ -1,0 +1,13 @@
+keys:
+  - &users:
+    - &dev    age19hvfewzq0wc4surdglhxg2xgqdtn7xhdh3lan2vjy90w0a770aqq0vew6g
+    - &ninox  age1rcylx4j4k5nsgw5sztr5298spwrslcwl2qwpqyy2x3szd9kmduustlz0k4
+  - &hosts:
+    - &canary age1p6n8ywh46m0y4uxx45tlpxw0ephwtxn3ry94sj0s3aypu8gj2s9sjrtsha
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+    - age:
+      - *dev
+      - *ninox
+      - *canary
