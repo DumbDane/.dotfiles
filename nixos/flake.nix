@@ -59,11 +59,13 @@
           ];
           specialArgs = { inherit inputs; };
         };
+
         canary = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [
             ./canary/configuration.nix
+            inputs.sops-nix.nixosModules.sops
           ];
         };
       };

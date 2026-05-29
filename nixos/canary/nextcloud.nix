@@ -1,0 +1,76 @@
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+
+{
+
+  services.nextcloud = {
+    enable = true;
+    package = pkgs.nextcloud33;
+    hostName = "lan.nextcloud";
+    database.createLocally = true;
+    configureRedis = true;
+    config = {
+      dbtype = "pgsql";
+      adminpassFile = config.sops.secrets."nextcloud-admin-pwd".path;
+      adminuser = "admin";
+    };
+    settings =
+      let
+        prot = "https";
+        dir = "/cloud";
+      in
+      {
+        overwriteprotocol = prot;
+        overwritewebroot = dir;
+        htaccess.RewriteBase = dir;
+        #overwrite.cli.url = "${prot}://127.0.0.1${dir}/";
+
+        trusted_domains = [
+          "192.168.8.51"
+          "canary.mullet-chimera.ts.net"
+        ];
+      };
+    extraAppsEnable = true;
+    extraApps = with config.services.nextcloud.package.packages.apps; {
+      inherit calendar mail;
+    };
+  };
+  services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [
+    {
+      addr = "127.0.0.1";
+      port = 8081;
+    }
+  ];
+
+  services.caddy = {
+    enable = true;
+
+    virtualHosts = {
+      # LAN access to Nextcloud
+      "lan.nextcloud" = {
+        hostName = "192.168.8.51";
+        # You can also add :443 later for TLS
+        extraConfig = ''
+          	      	handle_path /cloud* {
+          			reverse_proxy 127.0.0.1:8081
+          		}
+          	      '';
+      };
+
+      # Tailscale MagicDNS access
+      "canary.mullet-chimera.ts.net" = {
+        # Uses Caddy's automatic HTTPS with ACME — but Tailscale won't issue public certs.
+        # So: use an internal CA.
+        extraConfig = ''
+          		handle_path /cloud* { 
+          			reverse_proxy 127.0.0.1:8081
+          		}
+          	      '';
+      };
+    };
+  };
+}
