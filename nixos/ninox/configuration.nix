@@ -82,6 +82,7 @@
       tailscale
       ripgrep
       gcc
+      tree-sitter
       nixd
       pyright
       docker
@@ -95,6 +96,7 @@
       zotero
       bambu-studio
       easyeffects
+      thunderbird
     ];
   };
 
@@ -111,7 +113,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
     tmux
     git
     lua-language-server
@@ -126,6 +127,11 @@
   fonts.packages = [
     pkgs.nerd-fonts.jetbrains-mono
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   programs.obs-studio = {
     enable = true;
