@@ -7,9 +7,6 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     zen-browser.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -23,7 +20,6 @@
     inputs@{
       self,
       nixpkgs,
-      home-manager,
       nix-darwin,
       nix-homebrew,
       mac-app-util,
@@ -63,12 +59,12 @@
           ];
           specialArgs = { inherit inputs; };
         };
-      };
-
-      homeConfigurations = {
-        robert = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./home.nix ];
+        canary = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./canary/configuration.nix
+          ];
         };
       };
 
