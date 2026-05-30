@@ -18,6 +18,7 @@
     ./starr.nix
     ./ups.nix
     ./sops.nix
+    ./forgejo.nix
   ];
 
   # Users
