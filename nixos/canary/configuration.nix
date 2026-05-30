@@ -19,7 +19,9 @@
     ./ups.nix
     ./sops.nix
     ./forgejo.nix
+    ./caddy.nix
   ];
+
 
   # Users
   main-user.enable = true;
@@ -136,7 +138,6 @@
     cron
     caddy
     ripgrep
-    tailscale
     jdk21_headless
     ghostty
     gcc
@@ -145,7 +146,8 @@
     docker-ls
     pyright
     nextcloud32
-    pkgs.cifs-utils
+    cifs-utils
+    tree-sitter
   ];
 
   # Flakes

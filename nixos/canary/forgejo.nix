@@ -4,18 +4,6 @@
   ...
 }:
 {
-  services.caddy = {
-    enable = true;
-    virtualHosts."canary.mullet-chimera.ts.net".extraConfig = ''
-      handle /forgejo* {
-        request_body {
-          max_size 512MB
-        }
-        reverse_proxy localhost:3000
-      }
-    '';
-  };
-
   services.forgejo = {
     enable = true;
     database.type = "postgres";
@@ -25,7 +13,7 @@
     settings = {
       server = {
         SSH_PORT = lib.head config.services.openssh.ports;
-        DOMAIN = "https://canary.mullet-chimera.ts.net";
+        DOMAIN = "canary.mullet-chimera.ts.net";
         # You need to specify this to remove the port from URLs in the web UI.
         ROOT_URL = "https://canary.mullet-chimera.ts.net/forgejo/";
         HTTP_PORT = 3000;
