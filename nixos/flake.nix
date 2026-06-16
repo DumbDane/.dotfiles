@@ -28,10 +28,6 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      };
       macpkgs = import nixpkgs {
         system = "aarch64-darwin";
         config.allowUnfree = true;
@@ -42,18 +38,6 @@
         Ninox = lib.nixosSystem {
           inherit system;
           modules = [
-            (
-              { pkgs, ... }:
-              {
-                nixpkgs.overlays = [
-                  (final: prev: {
-                    openldap = prev.openldap.overrideAttrs (_: {
-                      doCheck = false;
-                    });
-                  })
-                ];
-              }
-            )
             ./ninox/configuration.nix
             ./modules
           ];
