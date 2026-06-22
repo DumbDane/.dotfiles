@@ -1,13 +1,10 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	branch = "main",
 	lazy = false,
 	build = ":TSUpdate",
 	config = function()
 		local treesitter = require("nvim-treesitter")
-
-		treesitter.setup({
-			install_dir = vim.fn.stdpath("data") .. "/site",
-		})
 
 		local languages = {
 			"vim",
@@ -22,6 +19,7 @@ return {
 			"rust",
 			"dockerfile",
 			"yaml",
+			"nix",
 		}
 
 		treesitter.install(languages)
@@ -42,17 +40,16 @@ return {
 					return
 				end
 
-        local bufok, err = pcall(vim.treesitter.start, buf)
-        if not bufok then
-          vim.notify(
-            "Treesitter unavailable for "
-            .. vim.bo[buf].filetype
-            .. " until parser is installed.",
-            vim.log.levels.WARN,
-            { title = "Treesitter" }
-          )
-          return
-        end
+				local started, err = pcall(vim.treesitter.start, buf)
+				if not started then
+					vim.notify(
+						"Treesitter unavailable for " .. vim.bo[buf].filetype .. ": " .. tostring(err),
+						vim.log.levels.WARN,
+						{ title = "Treesitter" }
+					)
+					return
+				end
+
 				vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 			end,
 		})

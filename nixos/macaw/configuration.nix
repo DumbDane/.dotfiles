@@ -38,7 +38,13 @@ let
       nodejs
       docker
       docker-compose
-      (python3.withPackages (ps: with ps; [ uv ]))
+      (python3.withPackages (
+        ps: with ps; [
+          uv
+          ruff
+        ]
+      ))
+      tree-sitter
     ];
 
     languageServers = with pkgs; [

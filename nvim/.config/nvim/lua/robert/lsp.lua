@@ -14,8 +14,8 @@ for _, file in pairs(lsp_configs) do
 
 	if ok and type(config) == "table" then
 		-- Ensure capabilities exist (but don't mutate protocol shapes)
-		config.capabilities =
-			vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), config.capabilities or {})
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		config.capabilities = vim.tbl_deep_extend("force", capabilities, config.capabilities or {})
 
 		-- Compose on_attach if the server defines its own
 		local server_on_attach = config.on_attach
