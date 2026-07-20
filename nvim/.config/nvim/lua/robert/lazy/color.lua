@@ -18,6 +18,16 @@ return {
 					transparency = true,
 				},
 			})
+		end,
+	},
+
+	{
+		"loctvl842/monokai-pro.nvim",
+		config = function()
+			require("monokai-pro").setup({
+				filter = "classic",
+				transparent_background = true,
+			})
 
 			ColorMyPencils()
 		end,

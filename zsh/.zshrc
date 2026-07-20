@@ -9,7 +9,6 @@ fi
 
 # For mac
 [[ "$OSTYPE" == darwin* ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # Set the directory we want to store zinit and plugings
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -90,7 +89,8 @@ eval "$(direnv hook zsh)"
 autoload -U compinit && compinit
 zinit cdreplay -q
 
-
+# Load optional .local
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

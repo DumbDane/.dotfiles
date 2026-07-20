@@ -64,3 +64,7 @@ end)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gu", vim.lsp.buf.references)
 vim.keymap.set("n", "<leader>q", vim.cmd.cclose)
+
+-- Commenting
+vim.keymap.set("n", "<C-'>", "gcc", { remap = true, desc = "Toggle comment" })
+vim.keymap.set("v", "<C-'>", "gc", { remap = true, desc = "Toggle comment" })
