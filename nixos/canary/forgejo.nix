@@ -15,7 +15,7 @@
         SSH_PORT = lib.head config.services.openssh.ports;
         DOMAIN = "canary.mullet-chimera.ts.net";
         # You need to specify this to remove the port from URLs in the web UI.
-        ROOT_URL = "https://canary.mullet-chimera.ts.net/forgejo/";
+        ROOT_URL = "https://canary.mullet-chimera.ts.net/forgejo";
         HTTP_PORT = 3000;
       };
       service.DISABLE_REGISTRATION = true;

@@ -12,7 +12,7 @@
             reverse_proxy 127.0.0.1:8081
           }
 
-          route /forgejo/* {
+          route /forgejo* {
             uri strip_prefix /forgejo
             request_body {
               max_size 512MB
