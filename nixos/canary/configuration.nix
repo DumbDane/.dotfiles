@@ -3,9 +3,7 @@
 # Nextcloudand in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  config,
   pkgs,
-  inputs,
   ...
 }:
 
@@ -20,7 +18,6 @@
     ./sops.nix
     ./forgejo.nix
     ./caddy.nix
-    ./peanut.nix
   ];
 
   # Users
@@ -188,6 +185,7 @@
       443 # Caddy / Tailscale
       9925 # Mealie
       25565 # Minecraft
+      3493 # NUT
     ];
     allowedUDPPorts = [ ];
     trustedInterfaces = [ "tailscale0" ];
