@@ -84,6 +84,7 @@ in
       "hammerspoon"
       "prusaslicer"
       "orcaslicer"
+      "chatgpt"
       "bambu-studio"
     ];
     masApps = { };

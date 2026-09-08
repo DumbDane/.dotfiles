@@ -20,8 +20,8 @@
     ./sops.nix
     ./forgejo.nix
     ./caddy.nix
+    ./peanut.nix
   ];
-
 
   # Users
   main-user.enable = true;
