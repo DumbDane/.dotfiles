@@ -21,18 +21,6 @@
           	      '';
       };
 
-      # Tailscale MagicDNS access
-      "canary.mullet-chimera.ts.net" = {
-        # Uses Caddy's automatic HTTPS with ACME — but Tailscale won't issue public certs.
-        # So: use an internal CA.
-        #useACMEHost = "canary.mullet-chimera.ts.net";
-        extraConfig = ''
-          	        tls internal
-          		handle /radarr* { 
-          			reverse_proxy 127.0.0.1:7878
-          		}
-          	      '';
       };
-    };
   };
 }

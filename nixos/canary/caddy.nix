@@ -8,8 +8,13 @@
           tls {
             get_certificate tailscale
           }
+
           handle_path /cloud* { 
             reverse_proxy 127.0.0.1:8081
+          }
+
+          handle /radarr* {
+            reverse_proxy 127.0.0.1:7878
           }
 
           route /forgejo* {
