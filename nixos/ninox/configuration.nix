@@ -100,7 +100,6 @@
       nextcloud-client
       nixfmt
       zotero
-      bambu-studio
       easyeffects
       thunderbird
     ];
