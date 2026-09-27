@@ -5,26 +5,26 @@
 
     virtualHosts = {
       "canary.mullet-chimera.ts.net".extraConfig = ''
-          tls {
-            get_certificate tailscale
-          }
+        tls {
+          get_certificate tailscale
+        }
 
-          handle_path /cloud* { 
-            reverse_proxy 127.0.0.1:8081
-          }
+        handle_path /cloud* { 
+          reverse_proxy 127.0.0.1:8081
+        }
 
-          handle /radarr* {
-            reverse_proxy 127.0.0.1:7878
-          }
+        handle /radarr* {
+          reverse_proxy 127.0.0.1:7878
+        }
 
-          route /forgejo* {
-            uri strip_prefix /forgejo
-            request_body {
-              max_size 512MB
-            }
-            reverse_proxy localhost:3000
+        route /forgejo* {
+          uri strip_prefix /forgejo
+          request_body {
+            max_size 512MB
           }
-        '';
+          reverse_proxy localhost:3000
+        }
+      '';
 
       "lan.nextcloud" = {
         hostName = "192.168.8.51";
