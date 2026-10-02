@@ -1,0 +1,26 @@
+{
+  flake.modules.nixos.gaming =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = with pkgs; [
+        steam
+        mangohud
+        protonup-qt
+        lutris
+        heroic
+        wine
+        wineWow64Packages.stableFull
+        winetricks
+        vulkan-tools
+
+        prismlauncher
+      ];
+
+      programs.steam = {
+        enable = true;
+        extraPackages = with pkgs; [ gamescope ];
+        gamescopeSession.enable = true;
+      };
+      programs.gamescope.enable = true;
+    };
+}
