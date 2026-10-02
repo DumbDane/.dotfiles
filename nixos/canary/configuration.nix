@@ -202,7 +202,6 @@
   # Enable the tailscale service
   services.tailscale = {
     enable = true;
-    extraUpFlags = [ "--exit-node=magpie" ];
     useRoutingFeatures = "client";
     permitCertUid = "caddy";
   };

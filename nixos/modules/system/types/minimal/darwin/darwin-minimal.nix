@@ -1,0 +1,27 @@
+{
+  inputs,
+  ...
+}:
+{
+  flake.modules.darwin.minimal =
+    { pkgs, ... }:
+    {
+      nixpkgs.config.allowUnfree = true;
+
+      # Not sure how this works
+      # nix.gc = {
+      #   automatic = true;
+      #   dates = "weekly";
+      #   persistent = true;
+      #   options = "--delete-older-than 30d";
+      # };
+      # nix.settings.auto-optimise-store = true;
+
+      nix.settings.experimental-features = "nix-command flakes";
+
+      # Used for backwards compatibility, please read the changelog before changing.
+      # $ darwin-rebuild changelog
+      system.stateVersion = 5;
+
+    };
+}

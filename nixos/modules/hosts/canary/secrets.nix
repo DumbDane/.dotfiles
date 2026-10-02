@@ -1,0 +1,16 @@
+{ self, ... }:
+{
+
+  flake.modules.nixos.canary = {
+    imports = with self.modules.nixos; [
+      secrets
+    ];
+
+    # sops.age = {
+    #   sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    #   keyFile = "/var/lib/sops-nix/key.txt";
+    #   generateKey = true;
+    # };
+  };
+
+}
