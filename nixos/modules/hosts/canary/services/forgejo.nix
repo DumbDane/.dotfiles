@@ -14,6 +14,16 @@
       ];
       sops.secrets.forgejo-admin-pwd = { };
 
+      networking.firewall = {
+        allowedTCPPorts = [
+          22 # SSH
+          # 80 # Caddy
+          443 # Caddy / Tailscale
+        ];
+        allowedUDPPorts = [ ];
+        trustedInterfaces = [ "tailscale0" ];
+      };
+
       services.forgejo = {
         enable = true;
         database.type = "postgres";

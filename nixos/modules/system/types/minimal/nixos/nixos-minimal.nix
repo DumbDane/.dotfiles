@@ -1,10 +1,15 @@
 {
+  self,
   ...
 }:
 {
-  flake.modules.nixos.minimal =
-    { ... }:
+  flake.modules.nixos.system-minimal =
+    { pkgs, ... }:
     {
+      imports = with self.modules.nixos; [
+        locales
+      ];
+
       nixpkgs.config.allowUnfree = true;
 
       nix.gc = {
@@ -20,7 +25,9 @@
         "flakes"
       ];
 
-      system.stateVersion = "24.11";
+      fonts.packages = [
+        pkgs.nerd-fonts.jetbrains-mono
+      ];
 
     };
 }

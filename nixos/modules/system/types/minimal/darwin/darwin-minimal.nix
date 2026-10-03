@@ -1,5 +1,4 @@
 {
-  inputs,
   ...
 }:
 {
@@ -18,6 +17,16 @@
       # nix.settings.auto-optimise-store = true;
 
       nix.settings.experimental-features = "nix-command flakes";
+
+      programs.zsh.enable = true;
+      programs.neovim = {
+        enable = true;
+        defaultEditor = true;
+      };
+
+      fonts.packages = [
+        pkgs.nerd-fonts.jetbrains-mono
+      ];
 
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog

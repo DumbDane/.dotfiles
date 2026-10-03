@@ -3,7 +3,7 @@ let
   name = "robert";
 in
 {
-  nixos."${name}" =
+  flake.modules.nixos."${name}" =
     { pkgs, ... }:
     {
       users.users."${name}" = {
@@ -16,10 +16,6 @@ in
 
         shell = pkgs.zsh;
 
-        imports = with self.modules.nixos; [
-          # things
-        ];
-
         packages = with pkgs; [
           stow
           fzf
@@ -30,5 +26,15 @@ in
           # powertop
         ];
       };
+
+      programs.zsh.enable = true;
+      programs.neovim = {
+        enable = true;
+        defaultEditor = true;
+      };
+
+      imports = with self.modules.nixos; [
+        # things
+      ];
     };
 }

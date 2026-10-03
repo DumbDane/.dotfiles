@@ -12,6 +12,14 @@
       ];
       sops.secrets.nextcloud-admin-pwd = { };
 
+      networking.firewall = {
+        allowedTCPPorts = [
+          443 # Caddy / Tailscale
+        ];
+        allowedUDPPorts = [ ];
+        trustedInterfaces = [ "tailscale0" ];
+      };
+
       services.nextcloud = {
         enable = true;
         package = pkgs.nextcloud34;

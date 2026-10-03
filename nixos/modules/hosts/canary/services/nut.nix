@@ -9,6 +9,14 @@
       ];
       sops.secrets.nut-admin-pwd = { };
 
+      networking.firewall = {
+        allowedTCPPorts = [
+          3493
+        ];
+        allowedUDPPorts = [ ];
+        trustedInterfaces = [ "tailscale0" ];
+      };
+
       power.ups = {
         enable = true;
         mode = "standalone";
