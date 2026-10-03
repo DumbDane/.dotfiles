@@ -9,4 +9,14 @@
       systemd-boot
     ];
   };
+
+  flake.modules.nixos.robert =
+    { pkgs, ... }:
+    {
+      users.users.robert = {
+      };
+      packages = with pkgs; [
+        powertop
+      ];
+    };
 }
