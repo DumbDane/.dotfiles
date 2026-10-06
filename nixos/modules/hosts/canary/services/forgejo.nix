@@ -1,14 +1,16 @@
 { self, ... }:
 {
-
   flake.modules.nixos.forgejo =
+    let
+      serviceName = "forgejo";
+      fqdn = "${serviceName}.mullet-chimera.ts.net";
+    in
     {
       lib,
       config,
       ...
     }:
     {
-
       imports = with self.modules.nixos; [
         secrets
       ];
@@ -17,11 +19,37 @@
       networking.firewall = {
         allowedTCPPorts = [
           22 # SSH
-          # 80 # Caddy
           443 # Caddy / Tailscale
         ];
         allowedUDPPorts = [ ];
         trustedInterfaces = [ "tailscale0" ];
+      };
+
+      services.tailscale = {
+        enable = true;
+        permitCertUid = "caddy";
+        serve = {
+          enable = true;
+          services.${serviceName} = {
+            endpoints = {
+              "tcp:443" = "http://localhost:3000";
+              "tcp:22" = "tcp://localhost:22";
+            };
+          };
+        };
+      };
+
+      services.caddy = {
+        enable = true;
+        virtualHosts."${fqdn}".extraConfig = ''
+          tls {
+            get_certificate tailscale
+          }
+          request_body {
+            max_size 512MB
+          }
+          reverse_proxy localhost:3000
+        '';
       };
 
       services.forgejo = {
@@ -33,9 +61,9 @@
         settings = {
           server = {
             SSH_PORT = lib.head config.services.openssh.ports;
-            DOMAIN = "canary.mullet-chimera.ts.net";
+            DOMAIN = "${fqdn}";
             # You need to specify this to remove the port from URLs in the web UI.
-            ROOT_URL = "https://canary.mullet-chimera.ts.net/forgejo";
+            ROOT_URL = "https://${fqdn}";
             HTTP_PORT = 3000;
           };
           service.DISABLE_REGISTRATION = true;
