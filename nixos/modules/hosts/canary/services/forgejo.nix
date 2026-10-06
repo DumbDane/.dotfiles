@@ -17,6 +17,7 @@
       sops.secrets.forgejo-admin-pwd = { };
 
       networking.firewall = {
+        enable = true;
         allowedTCPPorts = [
           22 # SSH
           443 # Caddy / Tailscale

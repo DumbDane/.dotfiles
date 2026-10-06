@@ -17,6 +17,7 @@
       sops.secrets.nextcloud-admin-pwd = { };
 
       networking.firewall = {
+        enable = true;
         allowedTCPPorts = [
           443 # Caddy / Tailscale
         ];
