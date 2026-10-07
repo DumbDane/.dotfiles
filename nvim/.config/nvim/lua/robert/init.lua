@@ -1,4 +1,6 @@
 require("robert.lazy_init")
 require("robert.set")
 require("robert.remap")
-require("robert.lsp")
+if not vim.g.vscode then
+	require("robert.lsp")
+end
