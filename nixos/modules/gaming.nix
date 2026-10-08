@@ -12,8 +12,9 @@
         wineWow64Packages.stableFull
         winetricks
         vulkan-tools
-      ];
 
+        prismlauncher
+      ];
 
       programs.steam = {
         enable = true;

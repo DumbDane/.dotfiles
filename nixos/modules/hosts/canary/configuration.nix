@@ -17,6 +17,12 @@
           powertop
         ];
       };
+      environment.systemPackages = with pkgs; [
+        # cifs-utils # was this just used for reaching pelican?
+        cron
+        # gcc
+        # jdk21_headless
+      ];
 
       # This value determines the NixOS release from which the default
       # settings for stateful data, like file locations and database versions

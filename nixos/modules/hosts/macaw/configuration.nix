@@ -3,12 +3,10 @@
   ...
 }:
 {
-  flake.modules.darwin.macaw = {
+  flake.modules.darwin.macaw = { pkgs, ... }: {
 
     imports = with self.modules.darwin; [
       system-desktop
-      browser
-      homebrew
     ];
     #         modules = [
     #           { nixpkgs.pkgs = macpkgs; }
@@ -24,6 +22,18 @@
     #             };
     #           }
     #         ];
+
+    environment.systemPackages = with pkgs; [
+      uv
+      ruff
+      ffmpeg
+      imagemagick
+      minikube
+      nodejs
+      postman
+      vscode
+      tailscale
+    ];
 
     system.primaryUser = "lauridspedersen";
 

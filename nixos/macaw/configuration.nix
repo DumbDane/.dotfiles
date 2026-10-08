@@ -60,31 +60,9 @@ let
 in
 {
   imports = [ ];
-  # The platform the configuration will be used on.
-  # pkgs.hostPlatform = "aarch64-darwin";
-  system.primaryUser = "lauridspedersen";
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = cfg.applications ++ cfg.packages ++ cfg.languageServers;
-
-  # Enable alternative shell support in nix-darwin.
-  programs.zsh.enable = true;
-
-  # Shell Aliases
-  # environment.shellAliases = { python = "python3"; };
-
-  # Fonts
-  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
-
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
-
-  # Set Git commit hash for darwin-version.
-  # system.configurationRevision = self.rev or self.dirtyRev or null;
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 5;
 
 }
