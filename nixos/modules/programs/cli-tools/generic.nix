@@ -8,6 +8,7 @@ let
         stow
         direnv
         ripgrep
+        sops
 
         docker
         docker-compose

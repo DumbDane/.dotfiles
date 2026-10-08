@@ -23,7 +23,6 @@ in
           gcc
           unzip
           jq
-          # powertop
         ];
       };
 

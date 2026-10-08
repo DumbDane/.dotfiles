@@ -10,12 +10,12 @@
       taps = [ ];
       brews = [ "mas" ];
       casks = [
-        "zotero"
         "hammerspoon"
         "prusaslicer"
         "orcaslicer"
         "chatgpt"
         "bambu-studio"
+        "nextcloud"
       ];
       masApps = { };
 

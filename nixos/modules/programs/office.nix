@@ -7,7 +7,6 @@ let
         thunderbird
         obsidian
         zotero
-        nextcloud-client
       ];
     };
 in

@@ -6,6 +6,7 @@
   flake.modules.darwin.macaw = {
 
     imports = with self.modules.darwin; [
+      system-desktop
       browser
       homebrew
     ];

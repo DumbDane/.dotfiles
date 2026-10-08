@@ -2,7 +2,7 @@
   ...
 }:
 {
-  flake.modules.darwin.minimal =
+  flake.modules.darwin.system-minimal =
     { pkgs, ... }:
     {
       nixpkgs.config.allowUnfree = true;
@@ -17,12 +17,6 @@
       # nix.settings.auto-optimise-store = true;
 
       nix.settings.experimental-features = "nix-command flakes";
-
-      programs.zsh.enable = true;
-      programs.neovim = {
-        enable = true;
-        defaultEditor = true;
-      };
 
       fonts.packages = [
         pkgs.nerd-fonts.jetbrains-mono

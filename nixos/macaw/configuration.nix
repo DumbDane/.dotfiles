@@ -68,29 +68,6 @@ in
   # $ nix-env -qaP | grep wget
   environment.systemPackages = cfg.applications ++ cfg.packages ++ cfg.languageServers;
 
-  homebrew = {
-    enable = true;
-    onActivation = {
-      autoUpdate = true;
-      upgrade = true;
-      cleanup = "zap";
-    };
-    taps = [ ];
-    brews = [ "mas" ];
-    casks = [
-      "ghostty"
-      "zen"
-      "zotero"
-      "hammerspoon"
-      "prusaslicer"
-      "orcaslicer"
-      "chatgpt"
-      "bambu-studio"
-    ];
-    masApps = { };
-
-  };
-
   # Enable alternative shell support in nix-darwin.
   programs.zsh.enable = true;
 
