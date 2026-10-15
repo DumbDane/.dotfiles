@@ -28,7 +28,7 @@
         serve = {
           enable = true;
           services.${serviceName}.endpoints = {
-            "tcp:443" = "https://localhost:443";
+            "tcp:443" = "tcp://localhost:443";
           };
         };
       };
