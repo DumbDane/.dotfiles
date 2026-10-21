@@ -5,6 +5,7 @@
       nut
       nextcloud
       forgejo
+      mealie
     ];
   };
 }
