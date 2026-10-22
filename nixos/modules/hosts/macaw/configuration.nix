@@ -18,6 +18,7 @@
       nodejs
       postman
       vscode
+      proton-pass
     ];
 
     system.primaryUser = "lauridspedersen";
