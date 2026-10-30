@@ -1,0 +1,121 @@
+name: Automatic Flake Update
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 17 1 * * 0 # Every Sunday at 01:17, GitHub week starts with Sunday
+      timezone: "Europe/Copenhagen"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-update-flake:
+    name: Update flake and open PR
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nixos
+    outputs:
+      updated: ${{ steps.update.outputs.updated }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update flake
+        id: update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c chore/auto-update-flake
+          before=$(git rev-parse HEAD)
+          nix flake update --commit-lock-file
+          after=$(git rev-parse HEAD)
+          if [ "$before" != "$after" ]; then
+            echo "updated=true" >> "$GITHUB_OUTPUT"
+            git push origin HEAD
+          fi
+
+      - name: Open PR
+        if: steps.update.outputs.updated == 'true'
+        run: |
+          gh pr create \
+          -B main \
+          --head chore/auto-update-flake \
+          --title 'Merge automatic flake update' \
+          --body 'Created by Github action'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+  nixos-check:
+    name: Check flake on NixOS
+    needs: [auto-update-flake]
+    if: needs.auto-update-flake.outputs.updated == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nixos
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: chore/auto-update-flake
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check Nixos
+        run: nix flake check
+
+  darwin-eval:
+    name: Evaluate flake on Darwin
+    needs: [auto-update-flake]
+    if: needs.auto-update-flake.outputs.updated == 'true'
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./nixos
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: chore/auto-update-flake
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check Darwin
+        run: |
+          nix eval \
+            --json .#darwinConfigurations \
+            --apply 'configs: builtins.mapAttrs (_: config: config.system.drvPath) configs'
+
+
+
+  close-success:
+    name: Merge successful flake update
+    needs: [auto-update-flake, nixos-check, darwin-eval]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close succesful PR
+        run: gh pr merge chore/auto-update-flake --rebase --delete-branch
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+
+
+  close-failure:
+    name: Close PR for failed flake update
+    needs: [auto-update-flake, nixos-check, darwin-eval]
+    if: >-
+      ${{ always() &&
+          needs['auto-update-flake'].result == 'success' &&
+          (needs['nixos-check'].result == 'failure' || needs['darwin-eval'].result == 'failure')}}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close failed PR
+        run: gh pr close chore/auto-update-flake --delete-branch   --comment "Automatic flake update failed validation."
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+

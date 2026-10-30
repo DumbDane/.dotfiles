@@ -32,5 +32,15 @@
       # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
       system.stateVersion = "24.05";
 
+      system.autoUpgrade = {
+        enable = true;
+        flake = "github:DumbDane/.dotfiles?dir=nixos";
+        flags = [
+          "--print-build-logs"
+        ];
+        dates = "Mon *-*-* 02:45:00";
+        randomizedDelaySec = "30";
+      };
+
     };
 }
