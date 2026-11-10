@@ -13,5 +13,7 @@
       variant = "nodeadkeys";
     };
 
+    programs.kde-pim.enable = false;
+
   };
 }
