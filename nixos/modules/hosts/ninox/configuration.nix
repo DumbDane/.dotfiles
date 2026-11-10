@@ -28,6 +28,7 @@
       };
       networking.networkmanager.enable = true;
       networking.hostName = "ninox";
+      networking.enableIPv6 = false;
 
       system.stateVersion = "24.11";
     };
