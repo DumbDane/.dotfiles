@@ -6,6 +6,7 @@
       nextcloud
       forgejo
       mealie
+      maps
     ];
   };
 }
