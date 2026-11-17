@@ -20,41 +20,35 @@
           ];
         };
 
-        # "/mnt/scratch" = {
-        #   device = "/dev/disk/by-uuid/4813F8CE35CC8FA0";
-        #   fsType = "ext4";
-        #   options = [ "nofail" ];
-        # };
+        "/mnt/scratch" = {
+          device = "/dev/disk/by-uuid/14099502-93cb-4732-b149-7791433c0093";
+          fsType = "ext4";
+          options = [ "nofail" ];
+        };
 
-        # # 7200 RPM HDD
-        # "/mnt/bulk" = {
-        #   device = "/dev/disk/by-uuid/4813F8CE35CC8FA0";
-        #   fsType = "ext4";
-        #   options = [
-        #     "noauto"
-        #     "nofail"
-        #     "x-systemd.automount"
-        #     "x-systemd.idle-timeout=600"
-        #   ];
-        # };
+        # 7200 RPM HDD
+        "/mnt/bulk" = {
+          device = "/dev/disk/by-uuid/41fd406a-246e-4cbc-9a59-cfc86fa145d8";
+          fsType = "ext4";
+          options = [
+            "noauto"
+            "nofail"
+            "x-systemd.automount"
+            "x-systemd.idle-timeout=300"
+          ];
+        };
 
-        # # 5400 RPM HDD
-        # "/mnt/cold" = {
-        #   device = "/dev/disk/by-uuid/4813F8CE35CC8FA0";
-        #   fsType = "ext4";
-        #   options = [
-        #     "noauto"
-        #     "nofail"
-        #     "x-systemd.automount"
-        #     "x-systemd.idle-timeout=600"
-        #   ];
-        # };
-
-        # Spin down both SATA HDDs after 5 minutes
-        # services.udev.extraRules = ''
-        #   ACTION=="add|change", KERNEL=="sd[a-z]", ENV{ID_SERIAL_SHORT}=="W9A4V73S", RUN+="${pkgs.hdparm}/bin/hdparm -B 127 -S 60 /dev/%k"
-        #   ACTION=="add|change", KERNEL=="sd[a-z]", ENV{ID_SERIAL_SHORT}=="WD-WCAV5V972987", RUN+="${pkgs.hdparm}/bin/hdparm -B 127 -S 60 /dev/%k"
-        # '';
+        # 5400 RPM HDD
+        "/mnt/cold" = {
+          device = "/dev/disk/by-uuid/b3a3173c-ce87-4432-8d13-7c0eefb12850";
+          fsType = "ext4";
+          options = [
+            "noauto"
+            "nofail"
+            "x-systemd.automount"
+            "x-systemd.idle-timeout=300"
+          ];
+        };
 
       };
 
@@ -71,5 +65,12 @@
           options = [ "discard=once" ];
         }
       ];
+
+      # Spin down both SATA HDDs after 5 minutes
+      services.udev.extraRules = ''
+        ACTION=="add|change", KERNEL=="sd[a-z]", ENV{ID_SERIAL_SHORT}=="W9A4V73S", RUN+="${pkgs.hdparm}/bin/hdparm -B 127 -S 72 /dev/%k"
+        ACTION=="add|change", KERNEL=="sd[a-z]", ENV{ID_SERIAL_SHORT}=="WD-WCAV5V972987", RUN+="${pkgs.hdparm}/bin/hdparm -S 72 /dev/%k"
+      '';
+
     };
 }
