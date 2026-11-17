@@ -7,6 +7,7 @@
       forgejo
       mealie
       maps
+      cache
     ];
   };
 }

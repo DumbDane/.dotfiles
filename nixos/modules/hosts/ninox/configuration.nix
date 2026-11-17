@@ -30,6 +30,15 @@
       networking.hostName = "ninox";
       networking.enableIPv6 = false;
 
+      nix.settings = {
+        extra-substituters = [
+          "http://cache.home.arpa"
+        ];
+        extra-trusted-public-keys = [
+          "canary-cache:srrC9pY0Z83qLYJWT3U3fe0BXQQCpXPDpD1iCsxJrNg="
+        ];
+      };
+
       system.stateVersion = "24.11";
     };
 }
