@@ -26,6 +26,9 @@
           nextcloud-client
         ];
       };
+
+      hardware.nvidia-container-toolkit.enable = true;
+
       networking.networkmanager.enable = true;
       networking.hostName = "ninox";
       networking.enableIPv6 = false;
