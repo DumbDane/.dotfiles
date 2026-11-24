@@ -9,10 +9,11 @@
       imports = with inputs.self.modules.nixos; [
         system-desktop
         systemd-boot
-        robert
         plasma-desktop
         gaming
         obs
+        robert
+        isaac
       ];
 
       users.users.robert = {
