@@ -17,9 +17,9 @@
 
   flake.modules.darwin.system-cli = { pkgs, ... }: {
     imports = with inputs.self.modules.darwin; [
-      system-default
       cli-tools
       shell
+      system-default
     ];
     programs.zsh.enable = true;
     environment.systemPackages = [ pkgs.neovim ];

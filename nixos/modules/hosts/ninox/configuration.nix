@@ -7,11 +7,7 @@
     { pkgs, ... }:
     {
       imports = with inputs.self.modules.nixos; [
-        system-desktop
-        systemd-boot
         plasma-desktop
-        gaming
-        obs
         robert
         isaac
       ];

@@ -4,8 +4,11 @@
     imports = with inputs.self.modules.nixos; [
       audio
       browser
+      gaming
+      obs
       office
       system-cli
+      systemd-boot
       vibes
     ];
   };

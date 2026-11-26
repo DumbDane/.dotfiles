@@ -1,5 +1,8 @@
+{ inputs, ... }:
 {
   flake.modules.nixos.plasma-desktop = {
+    imports = with inputs.self.modules.nixos; [ system-desktop ];
+
     # Settings for kde
     services.desktopManager.plasma6.enable = true;
     services.displayManager.sddm.enable = true;
