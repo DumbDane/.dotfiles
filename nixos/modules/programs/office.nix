@@ -13,7 +13,20 @@ in
     imports = [
       genericPackages
     ];
-    # environment.systemPackages = [ pkgs.zotero ];
+
+    # https://github.com/NixOS/nixpkgs/pull/572466
+    nixpkgs.overlays = [
+      (self: super: {
+        zotero =
+          (import super.path {
+            inherit (super) system;
+            config = super.config // {
+              permittedInsecurePackages = [ "firefox-esr-140-bin-unwrapped-140.17.0esr" ];
+            };
+          }).zotero;
+      })
+    ];
+    environment.systemPackages = [ pkgs.zotero ];
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
